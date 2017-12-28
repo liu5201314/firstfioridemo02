@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<title>Hello World App</title>
+	<script src="../../resources/sap-ui-core.js" 
+		id="sap-ui-bootstrap"                      
+		data-sap-ui-theme="sap_belize"           
+		data-sap-ui-libs="sap.m">                //M库
+	</script>
+	<script type="text/javascript">
+		sap.ui.getCore().attachInit(function(){ //核心库初始化以后的一个回调函数
+			var app = new sap.m.App("myApp", {  //实例化一个根节点
+				initialPage: "page1"            //默认一个Page1的初始页
+			});
+			// create first page or view
+		
+			var page1 = new sap.m.Page("page1", { //实例化一个page1的view
+				title: "Hello World",             //页面的抬头是hello world
+				shownNavButton: false,            //页面的按钮隐藏
+				content: new sap.m.Button({       //页面的内容是一个按钮
+					text: 'Go to Page 2',         //按钮的文本是'Go to Page 2'
+					press: function(){            //按钮的事件
+						app.to("page2");          //转到page2，转到事件是app根节点下
+						                          //的事件
+					}
+				})
+			});
+
+			//create second view or page
+			
+			var page2 = new sap.m.Page("page2", { //实例化一个page2
+				title: "Hello Word page 2",       //页面的名字是
+				showNavButton: true,              //显示页面的按钮
+				navButtonPress: function(){       //页面按钮的事件
+					app.back();                   //返回上一页
+				}
+			});
+			
+			app.addPage(page1).addPage(page2);    //把页面加到app
+			app.placeAt("content");               //把js转换到body主体
+		}); 
+	</script>
+</head>
+<body class="sapUiBody" id="content">
+</body>
+</html>
